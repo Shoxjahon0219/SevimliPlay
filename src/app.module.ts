@@ -1,8 +1,15 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AdminsModule } from './admins/admins.module';
-import { UsersModule } from './users/users.module';
+import { AdminsModule } from "./admins/admins.module";
+import { UsersModule } from "./users/users.module";
+import { AuthModule } from "./auth/auth.module";
+import { PlansModule } from "./plans/plans.module";
+import { SubscriptionsModule } from "./subscriptions/subscriptions.module";
+import { PaymentsModule } from "./payments/payments.module";
+import { DevicesModule } from "./devices/devices.module";
+import { ProfilesModule } from "./profiles/profiles.module";
+import { ContentsModule } from "./contents/contents.module";
 
 @Module({
   imports: [
@@ -18,8 +25,24 @@ import { UsersModule } from './users/users.module';
       synchronize: true,
       logging: false,
     }),
-    AdminsModule,
+
     UsersModule,
+
+    AdminsModule,
+
+    AuthModule,
+
+    PlansModule,
+
+    SubscriptionsModule,
+
+    PaymentsModule,
+
+    DevicesModule,
+
+    ProfilesModule,
+
+    ContentsModule,
   ],
 })
 export class AppModule {}

@@ -5,8 +5,12 @@ import {
   UpdateDateColumn,
   Entity,
   Unique,
+  OneToMany,
 } from "typeorm";
 import { Exclude } from "class-transformer";
+import { Subscription } from "../../subscriptions/entities/subscription.entity";
+import { Payment } from "../../payments/entities/payment.entity";
+import { Profile } from "../../profiles/entities/profile.entity";
 
 @Entity({ name: "users" })
 @Unique(["email"])
@@ -35,4 +39,13 @@ export class User {
 
   @UpdateDateColumn({ type: "timestamptz" })
   updated_at: Date;
+
+  @OneToMany(() => Subscription, (subscription) => subscription.user)
+  subscriptions: Subscription[];
+
+  @OneToMany(() => Payment, (payment) => payment.user)
+  payments: Payment[];
+
+  @OneToMany(() => Profile, (profile) => profile.user)
+  profiles: Profile[];
 }
