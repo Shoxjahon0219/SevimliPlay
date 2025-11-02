@@ -4,8 +4,12 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { ContentType } from "../../app.constants";
+import { Rating } from "../../ratings/entities/rating.entity";
+import { ContentTag } from "../../content_tags/entities/content_tag.entity";
+import { ContentCategory } from "../../content_categories/entities/content_category.entity";
 
 @Entity("contents")
 export class Content {
@@ -39,4 +43,16 @@ export class Content {
 
   @UpdateDateColumn({ type: "timestamp with time zone" })
   updated_at: Date;
+
+  @OneToMany(() => Rating, (rating) => rating.content)
+  ratings: Rating[];
+
+  @OneToMany(() => ContentTag, (contentTag) => contentTag.content)
+  content_tags: ContentTag[];
+
+  @OneToMany(
+    () => ContentCategory,
+    (contentCategory) => contentCategory.content
+  )
+  content_categories: ContentCategory[];
 }

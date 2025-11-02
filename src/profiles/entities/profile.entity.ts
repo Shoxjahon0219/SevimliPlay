@@ -12,6 +12,7 @@ import { User } from "../../users/entities/user.entity";
 import { Language, MaturityLevel } from "../../app.constants";
 import { BlobOptions } from "buffer";
 import { Device } from "../../devices/entities/device.entity";
+import { Rating } from "../../ratings/entities/rating.entity";
 
 @Entity("profiles")
 export class Profile {
@@ -49,4 +50,8 @@ export class Profile {
 
   @OneToMany(() => Device, (device) => device.profile)
   devices: Device[];
+
+  @OneToMany(() => Rating, (rating) => rating.profile)
+  ratings: Rating[];
+  
 }
